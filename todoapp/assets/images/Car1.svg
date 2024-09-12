@@ -1,0 +1,42 @@
+<svg width="100" height="120" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Car1">
+<line id="Car_bottom" x1="19" y1="62.5" x2="83" y2="62.5" stroke="black"/>
+<g id="Tires">
+<g id="Tire_right">
+<circle id="Tire_inside" cx="71" cy="62" r="1" fill="#00F0FF"/>
+<g id="Tire_outside" filter="url(#filter0_b_1_2)">
+<circle cx="71" cy="62" r="4.5" stroke="#00F0FF"/>
+</g>
+</g>
+<g id="Tire_left">
+<circle id="Tire_inside_2" cx="27" cy="62" r="1" fill="#00F0FF"/>
+<g id="Tire_outside_2" filter="url(#filter1_b_1_2)">
+<circle cx="27" cy="62" r="4.5" stroke="#00F0FF"/>
+</g>
+</g>
+</g>
+<line id="Road" x1="15" y1="66.5" x2="85" y2="66.5" stroke="black"/>
+<g id="Car">
+<path id="Car_Outline" d="M82.5 62.5C82.5 58.9 81.5 58 81 58C81 53.6 71.3334 52.1667 66.5 52L54 45C49.6 43.4 34.1667 45 27 46C23 46 21 53.3333 20.5 57L19 58L20 62.5" stroke="black"/>
+<path id="Car_left_window" d="M42 45L43 51.5L66.5 52" stroke="black"/>
+<path id="Car_right_window" d="M43 51.5L23 50" stroke="black"/>
+<path id="Car_door" d="M43 51.5C39.8 51.1 41.6666 58.6667 43 62.5" stroke="black"/>
+<path id="Car_handle" d="M43.5 53.5H47" stroke="#00F0FF"/>
+<path id="Car_Headlight" d="M80.5 56.5C76.9 58.1 74.6667 54.8333 74 53" stroke="#00F0FF"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_b_1_2" x="62" y="53" width="18" height="18" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="2"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_1_2"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_1_2" result="shape"/>
+</filter>
+<filter id="filter1_b_1_2" x="18" y="53" width="18" height="18" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="2"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_1_2"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_1_2" result="shape"/>
+</filter>
+</defs>
+</svg>
