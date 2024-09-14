@@ -26,7 +26,7 @@ class TodoTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withOpacity(0.2),
               spreadRadius: 5,
               blurRadius: 7,
               offset: const Offset(0, 3),
@@ -49,7 +49,9 @@ class TodoTile extends StatelessWidget {
                 decoration: isDone ? TextDecoration.lineThrough : TextDecoration.none,
               ),
             ),
-            CustomButton(name: "Edit", onPressed: editTask)
+            Container(
+              padding: EdgeInsets.only(right: 10),
+              child: CustomButton(name: "Edit", onPressed: editTask))
           ],
         ),
       ),
