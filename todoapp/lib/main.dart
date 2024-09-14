@@ -5,6 +5,7 @@ import 'package:todoapp/data/database.dart';
 
 import 'pages/add_memo_page.dart';
 import 'pages/home_page.dart';
+
 void main() async {
   // initialize hive
   await Hive.initFlutter(); // Initialize hive
@@ -15,8 +16,6 @@ void main() async {
   log('Hello World2');
 }
 
-
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -25,14 +24,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
- 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Memoria",
       home: Home(),
+      theme: ThemeData.light().copyWith(
+          colorScheme:
+              ColorScheme.fromSeed(seedColor: Color.fromRGBO(50, 1, 83, 1))),
+      darkTheme: ThemeData.dark().copyWith(
+          colorScheme:
+              ColorScheme.fromSeed(seedColor: Color.fromRGBO(50, 1, 83, 1))),
     );
   }
 }
@@ -45,7 +48,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   final controller = TextEditingController();
 
   final box = Hive.box('myBox');
@@ -56,16 +58,15 @@ class _HomeState extends State<Home> {
   TodoDataBase db = TodoDataBase();
 
   void updateTasks() {
-      setState(() {
-        db.todos.add({
-          "task": controller.text,
-          "isDone": false,
-        });
-        controller.clear();
+    setState(() {
+      db.todos.add({
+        "task": controller.text,
+        "isDone": false,
       });
-      db.saveData();
-    }
-
+      controller.clear();
+    });
+    db.saveData();
+  }
 
   @override
   void initState() {
@@ -107,36 +108,59 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-        title: const Text("Memoria - An Elephant Never Forgets",
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          color: Colors.white
-        ),
+      appBar: AppBar(
+        title: const Text(
+          "Memoria - An Elephant Never Forgets",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
-        backgroundColor: color,
       ),
       body: pages[currentPage],
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: color,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
-        currentIndex: currentPage,
-        onTap: updatePage,
-        items:
-        const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: "Add Memo",
-          ),
-        ],
-      ),
-      );
+      bottomNavigationBar: buildBottomNavNew(),
+    );
+  }
+
+  Widget buildBottomNav() {
+    return BottomNavigationBar(
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.grey,
+      currentIndex: currentPage,
+      onTap: updatePage,
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: "Home",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.add),
+          label: "Add Memo",
+        ),
+      ],
+    );
+  }
+
+  Widget buildBottomNavNew() {
+    return NavigationBar(
+      // selectedItemColor: Colors.white,
+      // unselectedItemColor: Colors.grey,
+      // currentIndex: currentPage,
+      // onTap: updatePage,
+      selectedIndex: currentPage,
+      onDestinationSelected: updatePage,
+
+      destinations: const [
+        NavigationDestination(
+          icon: Icon(Icons.home),
+          label: "Home",
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.add),
+          label: "Add Memo",
+        ),
+      ],
+    );
   }
 }
