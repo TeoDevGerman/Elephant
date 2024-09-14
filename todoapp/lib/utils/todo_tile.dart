@@ -19,8 +19,7 @@ class TodoTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        padding: const EdgeInsets.only(left: BorderSide.strokeAlignCenter, right: BorderSide.strokeAlignCenter, top: BorderSide.strokeAlignCenter),
-        
+        padding: const EdgeInsets.only(),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -33,7 +32,6 @@ class TodoTile extends StatelessWidget {
             ),
           ],
         ),
-
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -46,12 +44,14 @@ class TodoTile extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                decoration: isDone ? TextDecoration.lineThrough : TextDecoration.none,
+                decoration:
+                    isDone ? TextDecoration.lineThrough : TextDecoration.none,
               ),
             ),
             Container(
-              padding: EdgeInsets.only(right: 10),
-              child: CustomButton(name: "Edit", onPressed: editTask))
+              padding: const EdgeInsets.only(right: 10),
+              child: CustomButton(name: 'Edit', onPressed: editTask),
+            ),
           ],
         ),
       ),

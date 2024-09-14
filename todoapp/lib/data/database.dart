@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-class TodoDataBase{
+class TodoDataBase {
   List todos = [];
 
   final _myBox = Hive.box('myBox');
@@ -8,25 +8,25 @@ class TodoDataBase{
   void createInitData() {
     todos = [
       {
-        "task": "Buy groceries",
-        "isDone": false,
+        'task': 'Buy groceries',
+        'isDone': false,
       },
       {
-        "task": "Buy books",
-        "isDone": false,
+        'task': 'Buy books',
+        'isDone': false,
       },
       {
-        "task": "Buy stationery",
-        "isDone": false,
+        'task': 'Buy stationery',
+        'isDone': false,
       },
     ];
   }
 
-  void loadData(){
+  void loadData() {
     todos = _myBox.get('todos');
   }
 
-  void saveData(){
+  void saveData() {
     _myBox.put('todos', todos);
   }
 }

@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   void taskChanged(bool? val, int index) {
     setState(() {
-      widget.todos[index]["isDone"] = val;
+      widget.todos[index]['isDone'] = val;
     });
     widget.db.saveData();
   }
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
     ).then((value) {
       if (value != null) {
         setState(() {
-          if (value.containsKey("delete") && value["delete"] == true) {
+          if (value.containsKey('delete') && value['delete'] == true) {
             widget.todos.removeAt(index);
           } else {
             widget.todos[index] = value;
@@ -57,13 +57,13 @@ class _HomePageState extends State<HomePage> {
       itemCount: widget.todos.length,
       itemBuilder: (context, index) {
         return TodoTile(
-          isDone: widget.todos[index]["isDone"],
-          task: widget.todos[index]["task"],
+          isDone: widget.todos[index]['isDone'],
+          task: widget.todos[index]['task'],
           toggleDone: (val) {
             taskChanged(val, index);
           },
           editTask: () {
-            editTask(widget.todos[index]["task"], index, widget.controller);
+            editTask(widget.todos[index]['task'], index, widget.controller);
           },
         );
       },

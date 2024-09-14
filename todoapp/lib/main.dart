@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todoapp/data/database.dart';
 
-import 'pages/add_memo_page.dart';
-import 'pages/home_page.dart';
+import 'package:todoapp/pages/add_memo_page.dart';
+import 'package:todoapp/pages/home_page.dart';
 
 void main() async {
   // initialize hive
@@ -28,14 +28,18 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Memoria",
-      home: Home(),
+      title: 'Memoria',
+      home: const Home(),
       theme: ThemeData.light().copyWith(
-          colorScheme:
-              ColorScheme.fromSeed(seedColor: Color.fromRGBO(50, 1, 83, 1))),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromRGBO(50, 1, 83, 1),
+        ),
+      ),
       darkTheme: ThemeData.dark().copyWith(
-          colorScheme:
-              ColorScheme.fromSeed(seedColor: Color.fromRGBO(50, 1, 83, 1))),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromRGBO(50, 1, 83, 1),
+        ),
+      ),
     );
   }
 }
@@ -60,8 +64,8 @@ class _HomeState extends State<Home> {
   void updateTasks() {
     setState(() {
       db.todos.add({
-        "task": controller.text,
-        "isDone": false,
+        'task': controller.text,
+        'isDone': false,
       });
       controller.clear();
     });
@@ -72,7 +76,7 @@ class _HomeState extends State<Home> {
   void initState() {
     // only create initial Data if there never was any data else load the data
     super.initState();
-    if (box.get("todos") == null) {
+    if (box.get('todos') == null) {
       db.createInitData();
       db.saveData();
     } else {
@@ -103,14 +107,14 @@ class _HomeState extends State<Home> {
       currentPage = 0;
     });
   }
-  
-  final color = Color.fromRGBO(50, 1, 83, 1);
+
+  final color = const Color.fromRGBO(50, 1, 83, 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Memoria - An Elephant Never Forgets",
+          'Memoria - An Elephant Never Forgets',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -132,11 +136,11 @@ class _HomeState extends State<Home> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: "Home",
+          label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.add),
-          label: "Add Memo",
+          label: 'Add Memo',
         ),
       ],
     );
@@ -154,11 +158,11 @@ class _HomeState extends State<Home> {
       destinations: const [
         NavigationDestination(
           icon: Icon(Icons.home),
-          label: "Home",
+          label: 'Home',
         ),
         NavigationDestination(
           icon: Icon(Icons.add),
-          label: "Add Memo",
+          label: 'Add Memo',
         ),
       ],
     );

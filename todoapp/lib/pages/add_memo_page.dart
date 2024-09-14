@@ -22,8 +22,8 @@ class _AddMemoState extends State<AddMemo> {
   void addTask() {
     setState(() {
       widget.todos.add({
-        "task": widget.controller.text,
-        "isDone": false,
+        'task': widget.controller.text,
+        'isDone': false,
       });
       widget.controller.clear();
     });
@@ -42,29 +42,30 @@ class _AddMemoState extends State<AddMemo> {
       },
       child: Scaffold(
         body: Center(
-            child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: widget.controller,
-                decoration: const InputDecoration(
-                  hintText: "Enter your task",
-                  border: OutlineInputBorder(),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: widget.controller,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter your task',
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CustomButton(name: "Save", onPressed: addTaskAndGoBack),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CustomButton(name: 'Save', onPressed: addTaskAndGoBack),
+                  ],
+                ),
               ),
-            ),
-          ],
-        )),
+            ],
+          ),
+        ),
       ),
     );
   }
