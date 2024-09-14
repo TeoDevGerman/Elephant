@@ -26,6 +26,26 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
+ 
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Memoria",
+      home: Home(),
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
   final controller = TextEditingController();
 
   final box = Hive.box('myBox');
@@ -50,7 +70,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     // only create initial Data if there never was any data else load the data
-    if (db.todos.isEmpty) {
+    super.initState();
+    if (box.get("todos") == null) {
       db.createInitData();
       db.saveData();
     } else {
@@ -60,7 +81,12 @@ class _MyAppState extends State<MyApp> {
       HomePage(controller: controller, todos: db.todos, db: db),
       AddMemo(controller: controller, todos: db.todos, db: db),
     ];
-    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   int currentPage = 0;
@@ -76,16 +102,11 @@ class _MyAppState extends State<MyApp> {
       currentPage = 0;
     });
   }
+  
+  final color = Color.fromRGBO(50, 1, 83, 1);
   @override
   Widget build(BuildContext context) {
-    const color = Color.fromRGBO(50, 1, 83, 1);
-    log("current page: $currentPage");
-    var todos = db.todos;
-    log("todos: $todos");
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Memoria",
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
         title: const Text("Memoria - An Elephant Never Forgets",
         style: TextStyle(
@@ -116,15 +137,6 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
       ),
-      ),
-      routes: {
-        '/home': (context) => HomePage(controller: controller, todos: db.todos, db: db),
-        '/addMemo': (context) =>  AddMemo(
-          controller: controller,
-          todos: db.todos,
-          db: db,
-          ),
-      },
-    );
+      );
   }
 }
