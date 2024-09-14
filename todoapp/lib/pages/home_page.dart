@@ -19,7 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   void taskChanged(bool? val, int index) {
     setState(() {
       widget.todos[index]["isDone"] = val;
@@ -53,24 +52,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ListView.builder(
-          itemCount: widget.todos.length,
-          itemBuilder: (context, index) {
-            return TodoTile(
-              isDone: widget.todos[index]["isDone"],
-              task: widget.todos[index]["task"],
-              toggleDone: (val) {
-                taskChanged(val, index);
-              },
-              editTask: () {
-                editTask(widget.todos[index]["task"], index, widget.controller);
-              },
-            );
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      itemCount: widget.todos.length,
+      itemBuilder: (context, index) {
+        return TodoTile(
+          isDone: widget.todos[index]["isDone"],
+          task: widget.todos[index]["task"],
+          toggleDone: (val) {
+            taskChanged(val, index);
           },
-        ),
-      ),
+          editTask: () {
+            editTask(widget.todos[index]["task"], index, widget.controller);
+          },
+        );
+      },
     );
   }
 }
