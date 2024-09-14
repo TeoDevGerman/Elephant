@@ -19,25 +19,30 @@ class AddMemo extends StatefulWidget {
 }
 
 class _AddMemoState extends State<AddMemo> {
+  void addTask() {
+    setState(() {
+      widget.todos.add({
+        "task": widget.controller.text,
+        "isDone": false,
+      });
+      widget.controller.clear();
+    });
+    widget.db.saveData();
+  }
+
+  void addTaskAndGoBack() {
+    addTask();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    void addTask() {
-      setState(() {
-        widget.todos.add({
-          "task": widget.controller.text,
-          "isDone": false,
-        });
-        widget.controller.clear();
-      });
-      widget.db.saveData();
-    }
-    void addTaskAndGoBack() {
-      addTask();
-    }
-    return Scaffold(
-      body: Center(
-        child: Column(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        body: Center(
+            child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -59,7 +64,7 @@ class _AddMemoState extends State<AddMemo> {
               ),
             ),
           ],
-        )
+        )),
       ),
     );
   }
