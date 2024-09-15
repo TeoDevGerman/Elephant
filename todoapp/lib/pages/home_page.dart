@@ -50,21 +50,51 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void dismiss(int index) {
+    setState(() {
+      widget.todos.removeAt(index);
+      widget.db.saveData();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ReorderableListView.builder(
+      onReorder: (oldIndex, newIndex) {
+        setState(() {
+          if (oldIndex < newIndex) {
+            newIndex -= 1;
+          }
+          var item = widget.todos.removeAt(oldIndex);
+          widget.todos.insert(newIndex, item);
+          widget.db.saveData();
+        });
+      },
       padding: const EdgeInsets.symmetric(vertical: 12),
       itemCount: widget.todos.length,
       itemBuilder: (context, index) {
-        return TodoTile(
-          isDone: widget.todos[index]['isDone'],
-          task: widget.todos[index]['task'],
-          toggleDone: (val) {
-            taskChanged(val, index);
+        return Dismissible(
+          key: Key(widget.todos[index]['task'].toString()),
+          onDismissed: (direction) {
+            dismiss(index);
           },
-          editTask: () {
-            editTask(widget.todos[index]['task'], index, widget.controller);
-          },
+          background: Container(
+            color: Colors.red,
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: 20),
+            child: const Icon(Icons.delete),
+          ),
+          child: TodoTile(
+            key: ValueKey(widget.todos[index]['task']),
+            isDone: widget.todos[index]['isDone'],
+            task: widget.todos[index]['task'],
+            toggleDone: (val) {
+              taskChanged(val, index);
+            },
+            editTask: () {
+              editTask(widget.todos[index]['task'], index, widget.controller);
+            },
+          ),
         );
       },
     );
