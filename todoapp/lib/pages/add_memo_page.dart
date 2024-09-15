@@ -24,6 +24,7 @@ class _AddMemoState extends State<AddMemo> {
       widget.todos.add({
         'task': widget.controller.text,
         'isDone': false,
+        'key': UniqueKey(),
       });
       widget.controller.clear();
     });
