@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class TodoDataBase {
@@ -10,14 +11,17 @@ class TodoDataBase {
       {
         'task': 'Buy groceries',
         'isDone': false,
+        'key': UniqueKey(),
       },
       {
         'task': 'Buy books',
         'isDone': false,
+        'key': UniqueKey(),
       },
       {
         'task': 'Buy stationery',
         'isDone': false,
+        'key': UniqueKey(),
       },
     ];
   }
