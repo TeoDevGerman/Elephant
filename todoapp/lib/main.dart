@@ -61,17 +61,6 @@ class _HomeState extends State<Home> {
 
   TodoDataBase db = TodoDataBase();
 
-  void updateTasks() {
-    setState(() {
-      db.todos.add({
-        'task': controller.text,
-        'isDone': false,
-      });
-      controller.clear();
-    });
-    db.saveData();
-  }
-
   @override
   void initState() {
     // only create initial Data if there never was any data else load the data
